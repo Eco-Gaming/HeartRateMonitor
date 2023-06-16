@@ -1,4 +1,4 @@
-package me.ecogaming.heartratemonitor
+package me.ecogaming.heartratemonitor.fragments
 
 import android.Manifest
 import android.app.AlertDialog
@@ -13,12 +13,20 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.navigation.fragment.findNavController
+import me.ecogaming.heartratemonitor.R
 import me.ecogaming.heartratemonitor.databinding.FragmentHomeBinding
 
 
@@ -58,6 +66,29 @@ class HomeFragment : Fragment(), SensorEventListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(
+            object : MenuProvider {
+                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                    menuInflater.inflate(R.menu.menu_main, menu)
+                }
+
+                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                    return when (menuItem.itemId) {
+                        R.id.action_settings -> {
+                            true
+                        }
+                        R.id.action_about -> {
+                            findNavController().navigate(R.id.action_homeFragment_to_aboutFragment)
+                            true
+                        }
+                        else -> false
+                    }
+                }
+            },
+            viewLifecycleOwner, Lifecycle.State.RESUMED
+        )
 
         binding.buttonMeasureHeartRate.setOnClickListener {
             measure = !measure
