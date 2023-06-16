@@ -54,7 +54,7 @@ class HomeFragment : Fragment(), SensorEventListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         sensorManager = requireContext().getSystemService(Context.SENSOR_SERVICE) as SensorManager
         heartRateSensor = sensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE)
