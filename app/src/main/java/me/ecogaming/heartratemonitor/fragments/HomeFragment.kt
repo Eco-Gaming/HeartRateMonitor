@@ -77,6 +77,7 @@ class HomeFragment : Fragment(), SensorEventListener {
                 override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                     return when (menuItem.itemId) {
                         R.id.action_settings -> {
+                            findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
                             true
                         }
                         R.id.action_about -> {

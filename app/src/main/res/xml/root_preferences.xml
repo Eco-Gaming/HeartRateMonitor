@@ -1,0 +1,23 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:key="appearance_category"
+        app:title="@string/settings_appearance">
+
+        <ListPreference
+            app:defaultValue="system"
+            app:entries="@array/theme_entries"
+            app:entryValues="@array/theme_values"
+            app:key="theme"
+            app:title="@string/settings_theme"
+            app:useSimpleSummaryProvider="true" />
+
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:key="pref_amoled_theme"
+            app:summary="@string/amoled_theme_summary"
+            app:title="@string/amoled_theme" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
