@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">HeartRateMonitor</string>
     <string name="action_about">About</string>
+
+    <string name="text_heart_rate" translatable="false">%1$s bpm</string>
+    <string name="button_measure_heart_rate">Measure</string>
 </resources>
