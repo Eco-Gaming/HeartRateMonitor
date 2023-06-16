@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HeartRateMonitor</string>
+    <string name="app_name" translatable="false">HeartRateMonitor</string>
     <string name="about_view">About</string>
     <string name="settings_view">Settings</string>
 
@@ -14,7 +14,7 @@
     <string name="body_sensors_permission_dialog_go_to_settings">Go to Settings</string>
     <string name="cancel">Cancel</string>
 
-    <string name="about_description">This is a very simple Android app to measure your heart rate, using your phones heart rate sensor.\n\nI mainly made this app because I wanted to get readings from the sensor without using Samsung Health. It should work with all phones that have an integrated heart rate sensor like the Samsung Galaxy S7, S8, S9, S10 and probably more.</string>
+    <string name="about_description" translatable="false">This is a very simple Android app to measure your heart rate, using your phones heart rate sensor.\n\nI mainly made this app because I wanted to get readings from the sensor without using Samsung Health. It should work with all phones that have an integrated heart rate sensor like the Samsung Galaxy S7, S8, S9, S10 and probably more.</string>
 
     <string name="settings_appearance">Appearance</string>
     <string name="settings_theme">Theme</string>
@@ -23,5 +23,4 @@
     <string name="theme_dark">Dark</string>
     <string name="amoled_theme">AMOLED dark theme</string>
     <string name="amoled_theme_summary">Use AMOLED theme with a pure black background</string>
-    <string name="theme_dark_amoled">Dark (AMOLED)</string>
 </resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="text_heart_rate_idle">Knopf drücken um Messen zu beginnen</string>
+    <string name="text_heart_rate_accuracy">Genauigkeit: %1$s</string>
+    <string name="button_measure_heart_rate">Messen</string>
+    <string name="button_measure_heart_rate_stop">Messen beenden</string>
+    <string name="body_sensors_permission_dialog_go_to_settings">Einstellungen öffnen</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="settings_appearance">Aussehen</string>
+    <string name="settings_theme">Thema</string>
+    <string name="theme_system">Übernehme Systemeinstellung</string>
+    <string name="theme_light">Hell</string>
+    <string name="theme_dark">Dunkel</string>
+    <string name="amoled_theme">Vollständig dunkler Modus (für AMOLED Bildschirme)</string>
+    <string name="amoled_theme_summary">Verwenden Sie den Modus für AMOLED mit einem tiefschwarzen Hintergrund</string>
+    <string name="about_view">Über</string>
+    <string name="settings_view">Einstellungen</string>
+    <string name="body_sensors_permission_dialog_title">Körpersensoren Berechtigung erforderlich</string>
+    <string name="body_sensors_permission_dialog_message">Die Körpersensoren Berechtigung ist erforderlich. Bitte die Berechtigung in den App Einstellungen erlauben.</string>
+</resources>
