@@ -130,7 +130,6 @@ class HomeFragment : Fragment(), SensorEventListener {
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.BODY_SENSORS) == PackageManager.PERMISSION_GRANTED) {
             sensorManager.registerListener(this, heartRateSensor, SensorManager.SENSOR_DELAY_NORMAL)
             binding.textHeartRate.text = getString(R.string.text_heart_rate, "0")
-            binding.textHeartRate.textSize = 32F
             binding.textHeartRateAccuracy.text = getString(R.string.text_heart_rate_accuracy, "0")
             binding.buttonMeasureHeartRate.text = getString(R.string.button_measure_heart_rate_stop)
         } else {
@@ -146,7 +145,6 @@ class HomeFragment : Fragment(), SensorEventListener {
     private fun stopMeasuringHeartRate() {
         sensorManager.unregisterListener(this)
         binding.textHeartRate.text = getString(R.string.text_heart_rate_idle)
-        binding.textHeartRate.textSize = 24F
         binding.textHeartRateAccuracy.text = ""
         binding.buttonMeasureHeartRate.text = getString(R.string.button_measure_heart_rate)
     }
