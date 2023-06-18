@@ -48,6 +48,7 @@ class HomeFragment : Fragment(), SensorEventListener {
                 measureHeartRate()
             } else {
                 showBodySensorRationale(requireContext())
+                measure = false
             }
         }
 
@@ -122,6 +123,7 @@ class HomeFragment : Fragment(), SensorEventListener {
     override fun onPause() {
         super.onPause()
         stopMeasuringHeartRate()
+        measure = false
     }
 
     private fun measureHeartRate() {
@@ -134,6 +136,7 @@ class HomeFragment : Fragment(), SensorEventListener {
         } else {
             if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.BODY_SENSORS)) {
                 showBodySensorRationale(requireContext())
+                measure = false
             } else {
                 heartRateRequestPermissionLauncher.launch(Manifest.permission.BODY_SENSORS)
             }
