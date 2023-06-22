@@ -8,14 +8,26 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="me.ecogaming.heartratemonitor.fragments.HomeFragment"
-        android:label="@string/app_name"
+        android:label="@string/home_view"
         tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_heartRateFragment"
+            app:destination="@id/heartRateFragment" />
         <action
             android:id="@+id/action_homeFragment_to_aboutFragment"
             app:destination="@id/aboutFragment" />
         <action
             android:id="@+id/action_homeFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/heartRateFragment"
+        android:name="me.ecogaming.heartratemonitor.fragments.HeartRateFragment"
+        android:label="@string/heart_rate_view_title"
+        tools:layout="@layout/fragment_heart_rate" >
+        <action
+            android:id="@+id/action_heartRateFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
