@@ -19,4 +19,5 @@
     <string name="body_sensors_permission_dialog_message">Die Körpersensoren Berechtigung ist erforderlich. Bitte die Berechtigung in den App Einstellungen erlauben.</string>
     <string name="history_view">Verlauf</string>
     <string name="heart_rate_view_title">Puls messen</string>
+    <string name="home_view">Startseite</string>
 </resources>
