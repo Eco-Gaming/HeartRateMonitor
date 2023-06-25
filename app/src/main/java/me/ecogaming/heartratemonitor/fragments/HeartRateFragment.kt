@@ -35,6 +35,7 @@ class HeartRateFragment : Fragment(), SensorEventListener {
     private var heartRateSensor: Sensor? = null
     private var measure = false
     private val values = ArrayList<Int>()
+    private var average = 0
 
     private val heartRateRequestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
@@ -82,14 +83,17 @@ class HeartRateFragment : Fragment(), SensorEventListener {
             val heartRate = event.values[0]
             val heartRateInt = heartRate.toInt()
             binding.textHeartRate.text = getString(R.string.text_heart_rate, heartRateInt.toString())
-            if (heartRate > 0) values.add(heartRateInt)
+            if (heartRate > 0) {
+                values.add(heartRateInt)
+                val sum = values.sum()
+                average = sum / values.size
+            }
+            binding.textHeartRateAverage.text = getString(R.string.text_heart_rate_average, average.toString())
         }
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-        if (sensor?.type == Sensor.TYPE_HEART_RATE) {
-            binding.textHeartRateAccuracy.text = getString(R.string.text_heart_rate_accuracy, accuracy.toString())
-        }
+        return
     }
 
     override fun onPause() {
@@ -103,7 +107,7 @@ class HeartRateFragment : Fragment(), SensorEventListener {
             values.clear()
             sensorManager.registerListener(this, heartRateSensor, SensorManager.SENSOR_DELAY_NORMAL)
             binding.textHeartRate.text = getString(R.string.text_heart_rate, "0")
-            binding.textHeartRateAccuracy.text = getString(R.string.text_heart_rate_accuracy, "0")
+            binding.textHeartRateAverage.text = getString(R.string.text_heart_rate_average, "0")
             binding.buttonMeasureHeartRate.text = getString(R.string.button_measure_heart_rate_stop)
         } else {
             if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.BODY_SENSORS)) {
@@ -118,11 +122,9 @@ class HeartRateFragment : Fragment(), SensorEventListener {
     private fun stopMeasuringHeartRate() {
         sensorManager.unregisterListener(this)
         binding.textHeartRate.text = getString(R.string.text_heart_rate_idle)
-        binding.textHeartRateAccuracy.text = ""
+        binding.textHeartRateAverage.text = ""
         binding.buttonMeasureHeartRate.text = getString(R.string.button_measure_heart_rate)
 
-        val sum = values.sum()
-        val average = sum / values.size
         // TODO: add average to database together with current date and time
     }
 
