@@ -19,8 +19,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.preference.PreferenceManager
 import me.ecogaming.heartratemonitor.R
+import me.ecogaming.heartratemonitor.database.HeartRateHistory
+import me.ecogaming.heartratemonitor.database.HeartRateHistoryEntry
 import me.ecogaming.heartratemonitor.databinding.FragmentHeartRateBinding
+import java.util.Date
 
 
 class HeartRateFragment : Fragment(), SensorEventListener {
@@ -36,6 +40,9 @@ class HeartRateFragment : Fragment(), SensorEventListener {
     private var measure = false
     private val values = ArrayList<Int>()
     private var average = 0
+    private lateinit var date: Date
+
+    private lateinit var heartRateHistory: HeartRateHistory
 
     private val heartRateRequestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
@@ -54,6 +61,8 @@ class HeartRateFragment : Fragment(), SensorEventListener {
 
         sensorManager = requireContext().getSystemService(Context.SENSOR_SERVICE) as SensorManager
         heartRateSensor = sensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE)
+
+        heartRateHistory = HeartRateHistory(requireContext())
 
         _binding = FragmentHeartRateBinding.inflate(inflater, container, false)
         return binding.root
@@ -98,13 +107,17 @@ class HeartRateFragment : Fragment(), SensorEventListener {
 
     override fun onPause() {
         super.onPause()
-        stopMeasuringHeartRate()
-        measure = false
+        if (measure) {
+            stopMeasuringHeartRate()
+            measure = false
+        }
     }
 
     private fun measureHeartRate() {
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.BODY_SENSORS) == PackageManager.PERMISSION_GRANTED) {
             values.clear()
+            average = 0
+            date = Date()
             sensorManager.registerListener(this, heartRateSensor, SensorManager.SENSOR_DELAY_NORMAL)
             binding.textHeartRate.text = getString(R.string.text_heart_rate, "0")
             binding.textHeartRateAverage.text = getString(R.string.text_heart_rate_average, "0")
@@ -125,7 +138,11 @@ class HeartRateFragment : Fragment(), SensorEventListener {
         binding.textHeartRateAverage.text = ""
         binding.buttonMeasureHeartRate.text = getString(R.string.button_measure_heart_rate)
 
-        // TODO: add average to database together with current date and time
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        if (sharedPreferences.getBoolean("pref_save_history", true) && average > 0) {
+            val entry = HeartRateHistoryEntry(date, average)
+            heartRateHistory.pushValue(entry)
+        }
     }
 
     private fun showBodySensorRationale(context: Context) {

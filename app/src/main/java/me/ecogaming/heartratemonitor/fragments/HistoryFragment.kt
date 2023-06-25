@@ -13,6 +13,7 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import me.ecogaming.heartratemonitor.R
+import me.ecogaming.heartratemonitor.database.HeartRateHistory
 import me.ecogaming.heartratemonitor.databinding.FragmentHistoryBinding
 
 class HistoryFragment : Fragment() {
@@ -23,10 +24,14 @@ class HistoryFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private lateinit var heartRateHistory: HeartRateHistory
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        heartRateHistory = HeartRateHistory(requireContext())
 
         _binding = FragmentHistoryBinding.inflate(inflater, container, false)
         return binding.root
@@ -55,6 +60,12 @@ class HistoryFragment : Fragment() {
             },
             viewLifecycleOwner, Lifecycle.State.RESUMED
         )
+
+        binding.buttonShowLastEntry.setOnClickListener {
+            val entries = heartRateHistory.queryList()
+            if (entries.size < 1) return@setOnClickListener
+            // TODO: show most recent entry somehow (maybe with a delete button?)
+        }
     }
 
     override fun onDestroyView() {
@@ -67,7 +78,7 @@ class HistoryFragment : Fragment() {
         builder.setTitle(R.string.clear_history)
             .setMessage(R.string.clear_history_dialog_message)
             .setPositiveButton(R.string.clear_history) { _, _ ->
-                // TODO: clear history
+                heartRateHistory.clearList()
             }
             .setNegativeButton(R.string.cancel, null)
             .show()
