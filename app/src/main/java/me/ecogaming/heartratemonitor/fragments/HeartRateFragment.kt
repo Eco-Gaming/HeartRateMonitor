@@ -93,6 +93,9 @@ class HeartRateFragment : Fragment(), SensorEventListener {
             val heartRateInt = heartRate.toInt()
             binding.textHeartRate.text = getString(R.string.text_heart_rate, heartRateInt.toString())
             if (heartRate > 0) {
+                if (average == 0) {
+                    date = Date()
+                }
                 values.add(heartRateInt)
                 val sum = values.sum()
                 average = sum / values.size
@@ -117,7 +120,6 @@ class HeartRateFragment : Fragment(), SensorEventListener {
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.BODY_SENSORS) == PackageManager.PERMISSION_GRANTED) {
             values.clear()
             average = 0
-            date = Date()
             sensorManager.registerListener(this, heartRateSensor, SensorManager.SENSOR_DELAY_NORMAL)
             binding.textHeartRate.text = getString(R.string.text_heart_rate, "0")
             binding.textHeartRateAverage.text = getString(R.string.text_heart_rate_average, "0")
