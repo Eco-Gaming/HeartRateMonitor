@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="text_heart_rate_idle">Knopf drücken um Messen zu beginnen</string>
-    <string name="text_heart_rate_average">Durchschnitt: %1$s</string>
+    <string name="text_heart_rate_average">Durchschnitt: %1$s bpm</string>
     <string name="button_measure_heart_rate">Messen</string>
     <string name="button_measure_heart_rate_stop">Messen beenden</string>
     <string name="body_sensors_permission_dialog_go_to_settings">Einstellungen öffnen</string>

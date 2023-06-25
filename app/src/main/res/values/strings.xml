@@ -9,7 +9,7 @@
 
     <string name="text_heart_rate_idle">Press button to start measuring</string>
     <string name="text_heart_rate" translatable="false">%1$s bpm</string>
-    <string name="text_heart_rate_average">Average: %1$s</string>
+    <string name="text_heart_rate_average">Average: %1$s bpm</string>
     <string name="button_measure_heart_rate">Measure</string>
     <string name="button_measure_heart_rate_stop">Stop measuring</string>
 
