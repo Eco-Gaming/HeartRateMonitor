@@ -34,6 +34,7 @@ class HeartRateFragment : Fragment(), SensorEventListener {
     private lateinit var sensorManager: SensorManager
     private var heartRateSensor: Sensor? = null
     private var measure = false
+    private val values = ArrayList<Int>()
 
     private val heartRateRequestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
@@ -79,7 +80,9 @@ class HeartRateFragment : Fragment(), SensorEventListener {
     override fun onSensorChanged(event: SensorEvent?) {
         if (event?.sensor?.type == Sensor.TYPE_HEART_RATE) {
             val heartRate = event.values[0]
-            binding.textHeartRate.text = getString(R.string.text_heart_rate, heartRate.toInt().toString())
+            val heartRateInt = heartRate.toInt()
+            binding.textHeartRate.text = getString(R.string.text_heart_rate, heartRateInt.toString())
+            if (heartRate > 0) values.add(heartRateInt)
         }
     }
 
@@ -97,6 +100,7 @@ class HeartRateFragment : Fragment(), SensorEventListener {
 
     private fun measureHeartRate() {
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.BODY_SENSORS) == PackageManager.PERMISSION_GRANTED) {
+            values.clear()
             sensorManager.registerListener(this, heartRateSensor, SensorManager.SENSOR_DELAY_NORMAL)
             binding.textHeartRate.text = getString(R.string.text_heart_rate, "0")
             binding.textHeartRateAccuracy.text = getString(R.string.text_heart_rate_accuracy, "0")
@@ -116,6 +120,10 @@ class HeartRateFragment : Fragment(), SensorEventListener {
         binding.textHeartRate.text = getString(R.string.text_heart_rate_idle)
         binding.textHeartRateAccuracy.text = ""
         binding.buttonMeasureHeartRate.text = getString(R.string.button_measure_heart_rate)
+
+        val sum = values.sum()
+        val average = sum / values.size
+        // TODO: add average to database together with current date and time
     }
 
     private fun showBodySensorRationale(context: Context) {
