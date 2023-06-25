@@ -20,4 +20,8 @@
     <string name="history_view">Verlauf</string>
     <string name="heart_rate_view_title">Puls messen</string>
     <string name="home_view">Startseite</string>
+    <string name="settings_history">Verlauf</string>
+    <string name="save_history">Verlauf speichern</string>
+    <string name="clear_history">Verlauf löschen</string>
+    <string name="clear_history_dialog_message">Gesamten Verlauf löschen?</string>
 </resources>

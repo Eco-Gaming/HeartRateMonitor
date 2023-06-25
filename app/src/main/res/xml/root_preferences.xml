@@ -20,4 +20,15 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+        app:key="history_category"
+        app:title="@string/settings_history">
+
+        <SwitchPreferenceCompat
+            app:defaultValue="true"
+            app:key="pref_save_history"
+            app:title="@string/save_history" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

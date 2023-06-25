@@ -27,4 +27,9 @@
     <string name="theme_dark">Dark</string>
     <string name="amoled_theme">AMOLED dark theme</string>
     <string name="amoled_theme_summary">Use AMOLED theme with a pure black background</string>
+
+    <string name="settings_history">History</string>
+    <string name="save_history">Save history</string>
+    <string name="clear_history">Clear history</string>
+    <string name="clear_history_dialog_message">Clear all history?</string>
 </resources>
